@@ -72,6 +72,11 @@
 
 文件路径：`项目包路径/controller/XXXController.java`（示例：com.zbkj.admin.controller.merchant.MerchantIntegralProductController.java）
 
+> - 要有代码注释
+> - 控制层接受的请求参数要符合当前项目规范
+> - Service接受的请求参数要符合当前项目规范
+> - return 使用载体要使用当前项目规范
+
 ### 1.2 控制层代码示例
 
 ```java
@@ -99,6 +104,8 @@ public class MerchantIntegralProductController {
 ```
 
 ### 1.3 Java Service 实现
+
+> 要有代码注释
 
 ```java
 /**
@@ -134,6 +141,8 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
     }
 }
 ```
+
+> 实现层如果比较复杂，或者调用了一些方法，你要适当解释实现层逻辑，里面方法调用做了什么。
 
 ## 2. 查询相关说明
 
