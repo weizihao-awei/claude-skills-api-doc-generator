@@ -150,11 +150,9 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 
 ### 2.2 自定义 XML 查询
 
-
 #### 2.2.1 批量更新商品上下架状态
 
 **XML文件路径：**`项目包路径/mapper/XXXMapper.xml`（示例：com.zbkj.service.mapper.ProductMapper.xml）
-
 
 **Mapper接口对应方法：**
 
@@ -163,7 +161,6 @@ public interface ProductMapper extends BaseMapper<Product> {
     int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
 }
 ```
-
 
 **XML查询语句：**
 
@@ -187,30 +184,43 @@ public interface ProductMapper extends BaseMapper<Product> {
 
 > 比较复杂的 XML 要给出适当的解释
 
+## 3. 关键实现说明
 
+> 若接口不只是单纯的 CRUD，使用了特殊组件或非标准方法（如定时任务、Redis 缓存、消息队列、分布式锁、异步处理、第三方调用等），需在此逐一说明。仅做常规增删改查则填"无"。
 
+## 4. 执行流程
 
+> 用图文结合的方式说明接口的完整执行链路，方便快速理解接口做了什么，它的执行逻辑是什么样的。
 
-## 3. 
+### 4.1 流程图（Mermaid）
 
+```mermaid
+flowchart TD
+    A[收到请求] --> B[参数校验]
+    B -->|校验通过| C[执行业务逻辑]
+    B -->|校验失败| D[返回错误]
+    C --> E[返回结果]
+```
 
-## 4. 数据库相关说明
+### 4.2 执行步骤说明
+
+## 5. 数据库相关说明
 
 > 填写规则（按涉及的表逐张判断）：
 >
-> - 若表已存在（有 Entity 实体类）→ 填入 4.1 表信息概览 + 4.2 详细表结构
-> - 若表尚不存在（无 Entity 类）   → 不填 4.1/4.2，由 AI 根据需求在 4.3 中给出建表 DDL 脚本
-> - 示例：接口涉及 3 张表，其中 2 张已存在、1 张待建 → 4.1/4.2 列出已存在的 2 张表，4.3 给出待建表的 DDL
-> - 示例：接口涉及的表全部存在 → 只填 4.1 + 4.2，不填 4.3
-> - 示例：接口涉及的表全部待建 → 4.1/4.2 留空，只填 4.3
+> - 若表已存在（有 Entity 实体类）→ 填入 5.1 表信息概览 + 5.2 详细表结构
+> - 若表尚不存在（无 Entity 类）   → 不填 5.1/5.2，由 AI 根据需求在 5.3 中给出建表 DDL 脚本
+> - 示例：接口涉及 3 张表，其中 2 张已存在、1 张待建 → 5.1/5.2 列出已存在的 2 张表，5.3 给出待建表的 DDL
+> - 示例：接口涉及的表全部存在 → 只填 5.1 + 5.2，不填 5.3
+> - 示例：接口涉及的表全部待建 → 5.1/5.2 留空，只填 5.3
 
-### 4.1 表信息概览
+### 5.1 表信息概览
 
 | 序号 | 表名       | 用途   |
 | ---- | ---------- | ------ |
 | 1    | table_name | 表用途 |
 
-### 4.2 详细表结构
+### 5.2 详细表结构
 
 > 因 AI 无数据库连接权限，表结构可根据项目中 Java 实体类 (Entity/POJO) 字段来整理成表格。
 
@@ -220,7 +230,7 @@ public interface ProductMapper extends BaseMapper<Product> {
 | ------ | --------------------- | ------ | -------------- |
 | id     | bigint auto_increment | 无     | 主键ID（主键） |
 
-### 4.3 SQL 脚本
+### 5.3 SQL 脚本
 
 > 仅当存在需要新建的表时才填写此节。根据需求给出建表 DDL。
 
