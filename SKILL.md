@@ -2,9 +2,10 @@
 name: api-doc-generator
 description: >
   按照中文模板生成后端 API 开发文档。
-  Use when user asks to "生成API文档", "生成接口文档", "开发文档", "后端文档", "api docs",
+  Use when user asks to "生成 API 文档", "生成接口文档", "开发文档", "后端文档", "api docs",
   "API documentation", or wants to document API endpoints before coding.
   Also triggered when user describes a new feature and says "先出文档" or "先写文档".
+  **One interface = One document.** If user provides prototype/requirement involving multiple interfaces, generate SEPARATE documents for each interface.
 argument-hint: "[功能描述或需求说明]"
 model: sonnet
 ---
@@ -17,7 +18,14 @@ model: sonnet
 **Document what exists, not what's planned.** 文档反映真实代码实现，不是理想设计。
 生成前必须读取实际源码（Controller、Service、Entity），不能凭记忆或猜测填写。
 
+**One interface = One document.** 永远一个接口对应一个文档。若用户描述涉及多个接口（如原型图、功能模块），必须识别并拆分为多个独立文档，每个文档只描述一个接口。
+
 ## 工作流程
+
+### 0. 识别接口数量
+
+- 若用户提到"原型图""功能模块""XXX 管理"等涉及多个接口的场景，先列出所有涉及的接口（如"新增、删除、修改、查询、分页列表"），然后**逐个生成独立文档**。
+- 若用户只描述单个接口，直接继续下一步。
 
 ### 1. 读取模板和代码
 
@@ -80,6 +88,7 @@ model: sonnet
 ### 3. 交付前自检
 
 - 功能覆盖：是否覆盖了用户提到的所有接口
+- **多接口场景**：若涉及多个接口，是否已为每个接口生成独立文档？（不允许多个接口合并到一个文档）
 - 格式正确：是否严格遵循模板结构，`>` 提示词行是否已遵守，且未出现在文档中
 - 代码准确：Controller/Service 路径、方法名、参数是否与源码一致
 - 表结构完整：字段是否从实体类反推，与数据库对应
