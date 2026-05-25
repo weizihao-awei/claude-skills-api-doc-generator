@@ -137,39 +137,24 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 
 ## 2. 查询相关说明
 
-> 逐条列出接口涉及的主要数据库操作（查询/更新/插入/删除）。
-> 使用 MyBatis-Plus 自带方法的归入 2.1，涉及自定义 XML 的归入 2.2。
-> **两者不是互斥的**但大多数接口只用其中一种；不适用的小节直接填"无"即可。
-
-### 2.1 MyBatis-Plus 自带方法
-
-| 操作     | 说明                                         |
-| -------- | -------------------------------------------- |
-| 分页查询 | 使用 LambdaQueryWrapper + Page 实现分页查询  |
-| 批量更新 | 使用 updateBatchById 或 update(Wrapper) 实现 |
-
-### 2.2 自定义 XML 查询
-
-#### 2.2.1 批量更新商品上下架状态
-
-**XML文件路径：**`项目包路径/mapper/XXXMapper.xml`（示例：com.zbkj.service.mapper.ProductMapper.xml）
-
-**Mapper接口对应方法：**
+> 按实际使用的查询方式填写，不要同时写两种。
+>
+> - **单表操作**（BaseMapper / LambdaQueryWrapper）：简单说明用了哪个方法即可，做了什么查询。
+> - **多表/复杂查询**（自定义 XML）：列出 Mapper 方法 + XML 语句，越复杂越要详细解释。
 
 ```java
-public interface ProductMapper extends BaseMapper<Product> {
-    int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
-}
+// 单表示例：简单说明
+LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
+wrapper.eq(Product::getShowStatus, 1);
+productMapper.selectPage(page, wrapper);
 ```
 
-**XML查询语句：**
-
 ```xml
+<!-- 多表/复杂查询示例：列出完整 XML 并解释 -->
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbkj.service.mapper.ProductMapper">
 
-    <!-- 批量更新商品上下架状态（示例） -->
     <update id="batchUpdateShow" parameterType="java.util.Map">
         UPDATE table_name
         SET show_status = #{status}
@@ -182,7 +167,13 @@ public interface ProductMapper extends BaseMapper<Product> {
 </mapper>
 ```
 
-> 比较复杂的 XML 要给出适当的解释
+```java
+public interface ProductMapper extends BaseMapper<Product> {
+    int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
+}
+```
+
+> 复杂 XML 要给出适当解释
 
 ## 3. 关键实现说明
 
