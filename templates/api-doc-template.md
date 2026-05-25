@@ -7,7 +7,6 @@
 
 ## 1. 接口概述
 
-
 > 以下表格行数不固定，可根据实际需要增删行（如增加"请求域名""接口版本"等）。
 
 | 项目         | 说明                                                    |
@@ -138,15 +137,33 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 
 ## 2. 查询相关说明
 
-> 该接口查询相关逻辑根据实际业务需求实现，若涉及XML编写复杂查询，需详细列出XML查询语句；若无需XML查询（如使用MyBatis-Plus自带方法），简单说明即可。
+> 逐条列出接口涉及的主要数据库操作（查询/更新/插入/删除）。
+> 使用 MyBatis-Plus 自带方法的归入 2.1，涉及自定义 XML 的归入 2.2。
+> **两者不是互斥的**但大多数接口只用其中一种；不适用的小节直接填"无"即可。
 
-### 2.1 无XML查询（简单说明）
+### 2.1 MyBatis-Plus 自带方法
 
-说明：若使用MyBatis-Plus的updateBatchById、updateWrapper等自带方法实现查询/更新逻辑，无需编写XML文件，直接在Service层通过MyBatis-Plus API构建条件即可。
+| 操作     | 说明                                         |
+| -------- | -------------------------------------------- |
+| 分页查询 | 使用 LambdaQueryWrapper + Page 实现分页查询  |
+| 批量更新 | 使用 updateBatchById 或 update(Wrapper) 实现 |
 
-### 2.2 有XML查询（详细列出）
+### 2.2 自定义 XML 查询
+
+
+#### 2.2.1 批量更新商品上下架状态
 
 **XML文件路径：**`项目包路径/mapper/XXXMapper.xml`（示例：com.zbkj.service.mapper.ProductMapper.xml）
+
+
+**Mapper接口对应方法：**
+
+```java
+public interface ProductMapper extends BaseMapper<Product> {
+    int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
+}
+```
+
 
 **XML查询语句：**
 
@@ -168,23 +185,13 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 </mapper>
 ```
 
-**Mapper接口对应方法：**
-
-```java
-public interface ProductMapper extends BaseMapper<Product> {
-    // 对应XML中的批量更新方法
-    int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
-}
-```
-
 > 比较复杂的 XML 要给出适当的解释
 
-## 3. 处理逻辑
-
-> 如果代码逻辑比较复杂，可以画出流程图（Mermaid），并解释业务逻辑、执行步骤等
 
 
 
+
+## 3. 
 
 
 ## 4. 数据库相关说明
