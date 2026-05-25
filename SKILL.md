@@ -1,13 +1,9 @@
 ---
 name: api-doc-generator
 description: >
-  按照中文模板生成后端 API 开发文档。
-  Use when user asks to "生成 API 文档", "生成接口文档", "开发文档", "后端文档", "api docs",
-  "API documentation", or wants to document API endpoints before coding.
-  Also triggered when user describes a new feature and says "先出文档" or "先写文档".
-  **One interface = One document.** If user provides prototype/requirement involving multiple interfaces, generate SEPARATE documents for each interface.
+  按照中文模板生成后端 API 开发文档。One interface = One document. 若用户提供原型图或需求涉及多个接口，需为每个接口分别生成独立文档。
+  当用户描述新功能并说"先出文档"或"先写文档"时触发。
 argument-hint: "[功能描述或需求说明]"
-model: sonnet
 ---
 # API 文档生成器
 
