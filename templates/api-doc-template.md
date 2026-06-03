@@ -1,6 +1,9 @@
 > 此文件为纯模板，可按需修改。Skill 文件会引用此模板。
 > 标记为引用（`>`）的内容是给 AI 的指令（提示词），必须理解并遵守其要求，但不要直接复制到生成的文档里。
 
+> 生成文档时，最顶部必须插入 SKILL.md「配置 > 笔记属性」中的 Frontmatter，其中 `YYYY-MM-DD` 替换为生成当天真实日期。
+> 以下是正式文档内容。
+
 ---
 
 # 第一模块：接口描述
@@ -71,20 +74,15 @@
 ### 1.1 控制层代码位置
 
 让你输出控制层位置，是为了确保你了解项目结构，在准确的位置上写代码。因为有些项目控制层有分成管理端，客户端以及各种细分，又或者要写接口的控制层已经存在，不需要新建，以及可能不存在需要新建控制层，你需要把你控制层创建在准确的合适位置上。
->
 
 文件路径：`项目包路径/controller/XXXController.java`（示例：com.zbkj.admin.controller.merchant.MerchantIntegralProductController.java）
 
-
 ### 1.2 控制层代码示例
-
-
 
 > - 要有代码注释
 > - 控制层接受的请求参数要符合当前项目规范
 > - Service接受的请求参数要符合当前项目规范
 > - return 使用载体要使用当前项目规范
-
 
 ```java
 /**
@@ -153,9 +151,9 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 
 ## 2. 查询相关说明
 
-> 按实际使用的查询方式填写，不要同时写两种。
+> 按实际使用的查询方式填写，有使用到就写一一列出来，可以适当加小标题。	没有就不要写，如果没有使用到就不用写。
 >
-> - **单表操作**（BaseMapper / LambdaQueryWrapper）：简单说明用了哪个方法即可，做了什么查询。
+> - **单表操作**（BaseMapper / LambdaQueryWrapper）：单表操作比较简单，所以简单说明就好。
 > - **多表/复杂查询**（自定义 XML）：列出 Mapper 方法 + XML 语句，越复杂越要详细解释。
 
 ```java
