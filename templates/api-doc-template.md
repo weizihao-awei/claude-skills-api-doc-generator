@@ -149,45 +149,16 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 
 > 实现层如果比较复杂，或者调用了一些方法，你要适当解释实现层逻辑，里面方法调用做了什么。
 
+
+
+
 ## 2. 查询相关说明
 
-> 按实际使用的查询方式填写，有使用到就写一一列出来，可以适当加小标题。	没有就不要写，如果没有使用到就不用写。
+> 填写规则：
 >
-> - **单表操作**（BaseMapper / LambdaQueryWrapper）：单表操作比较简单，所以简单说明就好。
-> - **多表/复杂查询**（自定义 XML）：列出 Mapper 方法 + XML 语句，越复杂越要详细解释。
-
-```java
-// 单表示例：简单说明
-LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
-wrapper.eq(Product::getShowStatus, 1);
-productMapper.selectPage(page, wrapper);
-```
-
-```xml
-<!-- 多表/复杂查询示例：列出完整 XML 并解释 -->
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zbkj.service.mapper.ProductMapper">
-
-    <update id="batchUpdateShow" parameterType="java.util.Map">
-        UPDATE table_name
-        SET show_status = #{status}
-        WHERE id IN
-        <foreach collection="ids" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </update>
-
-</mapper>
-```
-
-```java
-public interface ProductMapper extends BaseMapper<Product> {
-    int batchUpdateShow(@Param("ids") List<Long> ids, @Param("status") Integer status);
-}
-```
-
-> 复杂 XML 要给出适当解释
+> - **单表 CRUD**：优先使用 MyBatis-Plus 的 BaseMapper 内置方法或 LambdaQueryWrapper 构建查询，一两句话说明调用了哪个方法即可，无需贴代码。
+> - **多表/复杂查询**：使用自定义 XML 实现。需列出完整的 Mapper 接口方法 + XML 语句，并根据复杂程度给出适当解释，越复杂解释越详细。
+> - 若接口没有使用 XML 查询，则不写小节。
 
 ## 3. 关键实现说明
 
