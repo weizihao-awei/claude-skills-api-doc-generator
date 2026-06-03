@@ -15,7 +15,7 @@ argument-hint: "[功能描述或需求说明]"
 
 ### 输出目录
 
-- 输出目录：`docs/api/`（项目根目录下的相对路径，不存在则自动创建）
+- 输出目录："C:\Users\86158\OneDrive\obsidian-vaults\xianganCompany开发仓库\小田鸭"
 
 ### 笔记属性
 
