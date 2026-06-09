@@ -2,7 +2,7 @@
 name: api-doc-generator
 description: >
   按照中文模板生成后端 API 开发文档。One interface = One document. 若用户提供原型图或需求涉及多个接口，需为每个接口分别生成独立文档。
-  当用户描述新功能并说"先出文档"或"先写文档"时触发。
+  当用户描述"生成接口文档"类似这样的描述的时候触发。
 argument-hint: "[功能描述或需求说明]"
 ---
 # API 文档生成器
