@@ -73,7 +73,7 @@
 
 ### 1.1 控制层代码位置
 
-让你输出控制层位置，是为了确保你了解项目结构，在准确的位置上写代码。因为有些项目控制层有分成管理端，客户端以及各种细分，又或者要写接口的控制层已经存在，不需要新建，以及可能不存在需要新建控制层，你需要把你控制层创建在准确的合适位置上。
+> 让你输出控制层位置，是为了确保你了解项目结构，在准确的位置上写代码。因为有些项目控制层有分成管理端，客户端以及各种细分，又或者要写接口的控制层已经存在，不需要新建，以及可能不存在需要新建控制层，你需要把你控制层创建在准确的合适位置上。
 
 文件路径：`项目包路径/controller/XXXController.java`（示例：com.zbkj.admin.controller.merchant.MerchantIntegralProductController.java）
 
@@ -148,9 +148,6 @@ public class IntegralShoppingServiceImpl implements IntegralShoppingService {
 ```
 
 > 实现层如果比较复杂，或者调用了一些方法，你要适当解释实现层逻辑，里面方法调用做了什么。
-
-
-
 
 ## 2. 查询相关说明
 
